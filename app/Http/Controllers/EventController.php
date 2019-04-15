@@ -9,19 +9,20 @@
  {
      public function index()
      {
-         $events = [];
          $data = Event::all();
+         $events = [];
          if($data->count()) {
              foreach ($data as $key => $value) {
                  $events[] = Calendar::event(
                      $value->title,
                      true,
                      new \DateTime($value->start_date),
-                     new \DateTime($value->end_date.' +1 day'),
+                     new \DateTime($value->end_date),
                      null,
                      // Add color and link on event
                      [
                          'color' => '#f05050',
+                         'textColor' => '#fff',
                          'url' => 'pass here url and any route',
                      ]
                  );
