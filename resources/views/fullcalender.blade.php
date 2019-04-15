@@ -51,14 +51,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="created_at">Data Inicio</label>
-                                        <input id="created_at" type="date" class="form-control" name="created_at" >
+                                        <label for="start_date">Data Inicio</label>
+                                        <input id="start_date" type="date" class="form-control" name="start_date" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="updated_at">Data Fim</label>
-                                        <input id="updated_at" type="date" class="form-control" name="updated_at" >
+                                        <label for="end_date">Data Fim</label>
+                                        <input id="end_date" type="date" class="form-control" name="end_date" >
                                     </div>  
                                 </div>
                             </div>

@@ -96,22 +96,14 @@ class HomeController extends Controller
             'end_date' => 'required'
         ]);
  
-        $add = $this->event->create($request->all());
+        $event = new Event;
         
-        /*if ($validator->fails()) {
-        	\Session::flash('warnning','Please enter the valid details');
-          //  return Redirect::to('/events')->withInput()->withErrors($validator);
-        }*/
-
-        //$event = new Event;
-        
-        /*$event->title = $request['title'];
-        $event->created_at = $request['created_at'];
-        $event->updated_at = $request['updated_at'];
-        $event->save();*/
+        $event->title = $request['title'];
+        $event->start_date = $request['start_date'];
+        $event->end_date = $request['end_date'];
+        $event->save();
  
-        //\Session::flash('success','Event added successfully.');
-        return redirect('/events');
+        return redirect('events');
     }
 
 }
