@@ -5,23 +5,24 @@ use Illuminate\Http\Request;
 use App\User;
 use Calendar;
  use App\Event; 
+ use Validator;
+ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
 
-    public function __construct(User $user)    {
+    public function __construct(User $user, Event $event)    {
         $this->middleware('auth');
         $this->user = $user;
+        $this->event = $event;
     }
  
-    public function index()    {
+    public function index(){
         $user = $this->user->all();
         return view('home', compact('user'));
     }
     
-
-    public function store (Request $request)
-    {
+    public function store (Request $request){
         $dados = $this->user->create($request->all());
 
         return view('home');
@@ -63,6 +64,7 @@ class HomeController extends Controller
 
     public function calender()
      {
+         $current = Carbon::now();
          $data = Event::all();
          $events = [];
          if($data->count()) {
@@ -70,11 +72,9 @@ class HomeController extends Controller
                  $events[] = Calendar::event(
                      $value->title,
                      true,
-                     
-                     new \DateTime($value->start_date),
-                     new \DateTime($value->end_date),
-                     null,
-                     // Add color and link on event
+                     $current = $value->start_date,
+                     $current= $value->end_date,
+                     null,// Add color and link on event
                      [
                          'color' => '#f05050',
                          'textColor' => '#fff',
@@ -84,17 +84,34 @@ class HomeController extends Controller
              }
          }
          $calendar = Calendar::addEvents($events);
+        
          return view('fullcalender', compact('calendar'));
      }
 
-     protected function createEvent(array $data)
+    public function addEvent(Request $request)
     {
-        return Event::create([
-            'created_at' => $data['created_at'],
-            'updated_at' => $data['updated_at'],
-            'title' => $data['title'],
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required'
         ]);
-        return redirect()->route('home');
+ 
+        $add = $this->event->create($request->all());
+        
+        /*if ($validator->fails()) {
+        	\Session::flash('warnning','Please enter the valid details');
+          //  return Redirect::to('/events')->withInput()->withErrors($validator);
+        }*/
+
+        //$event = new Event;
+        
+        /*$event->title = $request['title'];
+        $event->created_at = $request['created_at'];
+        $event->updated_at = $request['updated_at'];
+        $event->save();*/
+ 
+        //\Session::flash('success','Event added successfully.');
+        return redirect('/events');
     }
 
 }

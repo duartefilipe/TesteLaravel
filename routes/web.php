@@ -12,5 +12,5 @@ Route::get('/events', 'HomeController@calender');
 Route::post('/update/{id}', 'HomeController@update');
 Route::get('/delete/{id}', 'HomeController@delete');
 Route::get('/edit/{id}', 'HomeController@edit');
-Route::post('/createEvent', 'HomeController@createEvent');
+Route::post('/createEvent', 'HomeController@addEvent');
 

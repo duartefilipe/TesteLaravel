@@ -26,7 +26,6 @@
     <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-
                     <div class="panel-body">
                         {!! $calendar->calendar() !!}
                     </div>
@@ -37,12 +36,12 @@
                 <h2>Registrar Evento</h2>
             </div>
 
-                    <form method="POST" action="{{ route('createEvent') }}">
+                    <form method="POST" action="{{ url('/createEvent')}}">
                         @csrf
                         <div class="container">
                             <div class="form-group">
-                                <label for="name">Titulo</label>
-                                <input id="name" type="text" class="form-control" name="titulo" >
+                                <label for="title">Titulo</label>
+                                <input id="title" type="text"  class="form-control" name="title" >
                             </div>
                         </div>
 
@@ -52,14 +51,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">Data Inicio</label>
-                                        <input id="name" type="date" class="form-control" name="inicio" >
+                                        <label for="created_at">Data Inicio</label>
+                                        <input id="created_at" type="date" class="form-control" name="created_at" >
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">Data Fim</label>
-                                        <input id="name" type="date" class="form-control" name="fim" >
+                                        <label for="updated_at">Data Fim</label>
+                                        <input id="updated_at" type="date" class="form-control" name="updated_at" >
                                     </div>  
                                 </div>
                             </div>
