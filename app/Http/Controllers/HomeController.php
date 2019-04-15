@@ -52,18 +52,16 @@ class HomeController extends Controller
 
     public function update(Request $request, $id) {
         $id = $this->user->find($id);
-
         $id->name = $request->get('name');
         $id->email = $request->get('email');
-        
 
         $id->save();
 
         return redirect()->route('home');
     }
 
-    public function calender()
-     {
+    public function calender(){
+
          $current = Carbon::now();
          $data = Event::all();
          $events = [];
@@ -74,9 +72,9 @@ class HomeController extends Controller
                      true,
                      $current = $value->start_date,
                      $current= $value->end_date,
-                     null,// Add color and link on event
+                     null,
                      [
-                         'color' => '#f05050',
+                         'color' => 'green',
                          'textColor' => '#fff',
                          'url' => 'pass here url and any route',
                      ]
@@ -86,16 +84,11 @@ class HomeController extends Controller
          $calendar = Calendar::addEvents($events);
         
          return view('fullcalender', compact('calendar'));
-     }
+    }
 
-    public function addEvent(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required'
-        ]);
- 
+
+    
+     public function addEvent(Request $request){
         $event = new Event;
         
         $event->title = $request['title'];

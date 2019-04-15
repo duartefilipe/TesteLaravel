@@ -13,8 +13,6 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active"> <a class="nav-link" href="home">Inicio </a></li>
                         <li class="nav-item active"> <a class="nav-link" href="events">Calendario </a></li>
-                        <!--<li class="nav-item "> <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Cadastrar </a>
-                            <a  href="{{ route('register') }}">{{ __('Register') }}</a></li>-->
                     </ul>
                 </div>
             </nav>
@@ -68,7 +66,7 @@
                         <div class="form-group">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <!--{{ __('Register') }}--> Registrar Evento
+                                     Registrar Evento
                                 </button>
                             </div>
                         </div>

@@ -20,21 +20,11 @@
     <br><br>
 
     <div class="container">
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
+            
         <table class="table table-striped">
             <thead>
             
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Delete</th>
@@ -43,23 +33,21 @@
             </thead>
             <tbody>
             @foreach ($user as $u)
-            <tr>
-                <td>{{ $u->id}}</td>
-                <td>
-                    {{ $u->name }}
-                </td>
-                <td>
-                    {{ $u->email }}
-                </td>
-                <td>
-                    <a href="/delete/{{$u->id}}" style="color: black;" >Delete</a>
-                </td>
-                <td>
-                    <a href="/edit/{{$u->id}}" style="color: black;">Update</a>
-                    <!--<a href="#" data-toggle="modal" data-target="#modalUpdate" onclick="setaDadosModal('{{$u->id}}', '{{ $u->name }}', '{{ $u->email }}')" style="color: black;">Update</a>-->
-                </td>
-                
-            </tr>
+                <tr>
+                    <td>
+                        {{ $u->name }}
+                    </td>
+                    <td>
+                        {{ $u->email }}
+                    </td>
+                    <td>
+                        <a href="/delete/{{$u->id}}" style="color: black;" >Delete</a>
+                    </td>
+                    <td>
+                        <a href="/edit/{{$u->id}}" style="color: black;">Update</a>
+                    </td>
+                    
+                </tr>
             @endforeach
             </tbody>
             </table>

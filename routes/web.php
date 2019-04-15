@@ -7,7 +7,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-//Route::get('/events', 'EventController@index');
 Route::get('/events', 'HomeController@calender');
 Route::post('/update/{id}', 'HomeController@update');
 Route::get('/delete/{id}', 'HomeController@delete');
