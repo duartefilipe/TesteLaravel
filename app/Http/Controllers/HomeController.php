@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
+use Calendar;
+ use App\Event; 
 
 class HomeController extends Controller
 {
@@ -56,6 +58,42 @@ class HomeController extends Controller
 
         $id->save();
 
+        return redirect()->route('home');
+    }
+
+    public function calender()
+     {
+         $data = Event::all();
+         $events = [];
+         if($data->count()) {
+             foreach ($data as $key => $value) {
+                 $events[] = Calendar::event(
+                     $value->title,
+                     true,
+                     
+                     new \DateTime($value->start_date),
+                     new \DateTime($value->end_date),
+                     null,
+                     // Add color and link on event
+                     [
+                         'color' => '#f05050',
+                         'textColor' => '#fff',
+                         'url' => 'pass here url and any route',
+                     ]
+                 );
+             }
+         }
+         $calendar = Calendar::addEvents($events);
+         return view('fullcalender', compact('calendar'));
+     }
+
+     protected function createEvent(array $data)
+    {
+        return Event::create([
+            'created_at' => $data['created_at'],
+            'updated_at' => $data['updated_at'],
+            'title' => $data['title'],
+        ]);
         return redirect()->route('home');
     }
 
