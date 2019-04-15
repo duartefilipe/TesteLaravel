@@ -39,4 +39,24 @@ class HomeController extends Controller
         }
     }
 
+    public function edit ($id) {
+        $userid = $this->user->find($id);
+
+        return view('edit', compact('userid'));
+
+
+    }
+
+    public function update(Request $request, $id) {
+        $id = $this->user->find($id);
+
+        $id->name = $request->get('name');
+        $id->email = $request->get('email');
+        
+
+        $id->save();
+
+        return redirect()->route('home');
+    }
+
 }

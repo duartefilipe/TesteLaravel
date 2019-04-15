@@ -18,9 +18,10 @@
                         <a class="nav-link" href="#">Inicio </a>
                     </li>
 
-                    <li class="nav-item ">
+                    <!--<li class="nav-item ">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Cadastrar </a>
-                    </li>
+                        <a  href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>-->
 
                     </ul>
                     
@@ -49,8 +50,10 @@
             
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nome</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,8 +64,16 @@
                     {{ $u->name }}
                 </td>
                 <td>
-                    <a href="/delete/{{$u->id}}">Delete</a>
+                    {{ $u->email }}
                 </td>
+                <td>
+                    <a href="/delete/{{$u->id}}" style="color: black;" >Delete</a>
+                </td>
+                <td>
+                    <a href="/edit/{{$u->id}}" style="color: black;">Update</a>
+                    <!--<a href="#" data-toggle="modal" data-target="#modalUpdate" onclick="setaDadosModal('{{$u->id}}', '{{ $u->name }}', '{{ $u->email }}')" style="color: black;">Update</a>-->
+                </td>
+                
             </tr>
             @endforeach
             </tbody>
@@ -159,5 +170,58 @@
       
     </div>
   </div>
+</div>
+
+<script>
+        function setaDadosModal(id, name, email) {
+            document.getElementById('id').value = id;
+            document.getElementById('name').value = name;
+            document.getElementById('email').value = email;
+        }
+    </script>
+
+<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalUpdate">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalUpdate">Alterar Usuario</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="{{ url('/update', $u->id) }}" method="post">
+
+                        <!--<input type="text" name="campo" id="campo" value="campo">-->
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Nome:</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" name="name" id="name" value="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Email:</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" name="email" id="email" value="email">
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-success" style="background-color: #3F80BD"
+                                        id="enviar">Enviar
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
 </div>
 @endsection
