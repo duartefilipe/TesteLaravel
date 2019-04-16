@@ -34,8 +34,8 @@
         $calendar_event->title            = $request->input("title");
         $calendar_event->start            = $request->input("start");
         $calendar_event->end              = $request->input("end");
-        $calendar_event->is_all_day       = $request->input("is_all_day");
-        $calendar_event->background_color = $request->input("background_color");
+        //$calendar_event->is_all_day       = $request->input("is_all_day");
+        //$calendar_event->background_color = $request->input("background_color");
         $calendar_event->save();
         return redirect()->route('calendar_events.index')->with('message', 'Item created successfully.');
     }
@@ -74,8 +74,8 @@
         $calendar_event->title            = $request->input("title");
         $calendar_event->start            = $request->input("start");
         $calendar_event->end              = $request->input("end");
-        $calendar_event->is_all_day       = $request->input("is_all_day");
-        $calendar_event->background_color = $request->input("background_color");
+        //$calendar_event->is_all_day       = $request->input("is_all_day");
+        //$calendar_event->background_color = $request->input("background_color");
         $calendar_event->save();
         return redirect()->route('events')->with('message', 'Item updated successfully.');
     }
