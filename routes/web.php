@@ -12,4 +12,7 @@ Route::post('/update/{id}', 'HomeController@update');
 Route::get('/delete/{id}', 'HomeController@delete');
 Route::get('/edit/{id}', 'HomeController@edit');
 Route::post('/createEvent', 'HomeController@addEvent');
+Route::get('/deleteEvent/{id}', 'HomeController@deleteEvent');
+Route::post('/updateEvent/{id}', 'HomeController@updateEvent');
+
 

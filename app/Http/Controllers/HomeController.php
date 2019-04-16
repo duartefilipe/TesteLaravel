@@ -7,6 +7,9 @@ use Calendar;
  use App\Event; 
  use Validator;
  use Carbon\Carbon;
+ use interaction;
+ use  daygrid;
+ use core;
 
 class HomeController extends Controller
 {
@@ -19,7 +22,8 @@ class HomeController extends Controller
  
     public function index(){
         $user = $this->user->all();
-        return view('home', compact('user'));
+        $event = $this->event->all();
+        return view('home', compact('user', 'event'));
     }
     
     public function store (Request $request){
@@ -65,6 +69,7 @@ class HomeController extends Controller
          $current = Carbon::now();
          $data = Event::all();
          $events = [];
+         
          if($data->count()) {
              foreach ($data as $key => $value) {
                  $events[] = Calendar::event(
@@ -77,13 +82,27 @@ class HomeController extends Controller
                          'color' => 'green',
                          'textColor' => '#fff',
                          'url' => 'pass here url and any route',
+                         
                      ]
                  );
              }
          }
-         $calendar = Calendar::addEvents($events);
-        
-         return view('fullcalender', compact('calendar'));
+         //$calendar = Calendar::addEvents($events);
+
+         $calendar = Calendar::addEvents($events, [ //set custom color fo this event
+            //'color' => '#800',
+            
+                    ])->setOptions([ //set fullcalendar options
+                        //'firstDay' => 1,
+                        'selectable' => true,
+                        'selectHelper' =>true,
+                        'slotLabelFormat' => 'HH:mm',
+                        'allDay' => true,
+                    ]);
+            
+            $event = $this->event->all();
+           
+         return view('fullcalender', compact('calendar', 'event'));
     }
 
 
@@ -98,5 +117,32 @@ class HomeController extends Controller
  
         return redirect('events');
     }
+
+    public function deleteEvent ($id) {
+
+        $event = $this->event->find($id);
+
+        $delete = $event->delete();
+        if($delete) {
+            return redirect('events');
+        } else {
+            return redirect('events');
+        }
+    }
+
+    public function updateEvent(Request $request, $id) {
+       
+        $id = $this->event->find($id);
+       
+        $id->title = $request->get('title');
+        $id->start_date = $request->get('start_date');
+        $id->end_date = $request->get('end_date');
+        
+        $id->save();
+
+        return redirect('events');
+    }
+    
+
 
 }
